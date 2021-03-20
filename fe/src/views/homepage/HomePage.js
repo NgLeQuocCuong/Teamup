@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet';
 import Calendar from 'react-calendar';
 import PageHeader from '../../utils/PageHeader';
 import ProfileContext from '../../context/ProfileContext';
+import ActivitiesContainer from '../../utils/ActivitiesContainer'
 
 export default class HomePage extends PureComponent {
     constructor(props) {
@@ -29,10 +30,13 @@ export default class HomePage extends PureComponent {
                             minDetail='year'
                             locale='en'
                         />
+                    </div>
 
-                        <div>
-                            
-                        </div>
+                    <div className="right-wrapper">
+                        <ActivitiesContainer 
+                            label='PERSONAL'
+                            activityData=''
+                            />
                     </div>
                 </div>
             </div>

@@ -1,0 +1,26 @@
+.activities-container {
+    *{
+        background-color: purple;
+        height: 50px;
+    }
+
+    .title-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .label {
+        padding-left: 10px;
+        color : white;
+    }
+
+    .add-button {
+        background-color: orange;
+        width: 100px;
+        height: 40px;
+        background-repeat: no-repeat;
+        background-position: center;
+        margin-right: 5px;
+    }
+}

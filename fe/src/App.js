@@ -18,7 +18,7 @@ class App extends PureComponent {
                 <ScrollToTop>
                     <ProfileContext.Provider
                         value={{
-                            access: 'hihi',
+                            access: '',
                             refresh: 'ahuhu',
                         }}
                     >

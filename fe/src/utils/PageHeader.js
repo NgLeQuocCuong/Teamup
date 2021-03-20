@@ -13,10 +13,10 @@ export default class PageHeader extends PureComponent {
                         <div className='right-content'>
                             <div className='icon-24 white-notification-icon' />
                             <div className='icon-24 white-person-icon' />
-                            <div className='icon-24 logout-icon' />
+                            <div className='icon-24 logout-icon pointer' />
                         </div> :
                         <div className='right-content'>
-                            <div className=''>Login</div>
+                            <div className='icon-24 login-icon pointer' />
                         </div>
                 }
             </div>
