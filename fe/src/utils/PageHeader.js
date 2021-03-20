@@ -14,7 +14,7 @@ export default class PageHeader extends PureComponent {
                             <div className='icon-24 white-person-icon' />
                         </div> :
                         <div className='right-content'>
-                            <div className=''>Login</div>
+                            <div className='' onClick={this.props.openLoggin}>Login</div>
                         </div>
                 }
             </div>
