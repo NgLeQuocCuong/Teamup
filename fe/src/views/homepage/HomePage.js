@@ -66,8 +66,14 @@ export default class HomePage extends PureComponent {
                     <div className="right-wrapper">
                         <ActivitiesContainer
                             label='PERSONAL'
-                            activityData=''
+                            isHost='true'
                         />
+                        {/* <ActivitiesContainer 
+                            label='FRIENDS'
+                            />
+                        <ActivitiesContainer 
+                            label='NEARBY'
+                            /> */}
                     </div>
                 </div>
                 <Modal isOpen={this.state.isFormOpen} toggle={this.toggleForm} zIndex="1600">
