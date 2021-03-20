@@ -1,0 +1,14 @@
+.home-page {
+    margin-top: 12px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    .left-wrapper {
+        width: calc(20% - 6px);
+        height: fit-content;
+    }
+    .right-wrapper {
+        width: calc(80% - 6px);
+        height: fit-content;
+    }
+}

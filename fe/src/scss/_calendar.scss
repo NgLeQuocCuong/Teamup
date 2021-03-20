@@ -1,0 +1,9 @@
+.default-calendar {
+    *{    
+        background-color: white;
+        border: none;
+    }
+}
+.react-calendar__month-view__days__day--neighboringMonth{
+    color: $textTwo;
+}
