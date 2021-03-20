@@ -6,6 +6,7 @@ import ProfileContext from '../../context/ProfileContext';
 import ActivitiesContainer from '../../utils/ActivitiesContainer'
 import { Modal } from 'reactstrap';
 import Login from '../../utils/Login';
+import MapViewer from '../../utils/MapViewer';
 
 
 export default class HomePage extends PureComponent {
@@ -15,7 +16,17 @@ export default class HomePage extends PureComponent {
             date: new Date(),
             isFormOpen: false,
             form: null,
+            lat: '',
+            lng: '',
         }
+    }
+    getPosition = () => {
+        navigator.geolocation.getCurrentPosition(position =>
+            this.setState({
+                lat: position.coords.latitude,
+                lng: position.coords.longtitude,
+            })
+        )
     }
     toggleForm = () => {
         const isFormOpen = !this.state.isFormOpen
@@ -33,6 +44,7 @@ export default class HomePage extends PureComponent {
         })
     }
     render() {
+        console.log(typeof this.state.lng)
         return (
             <div id='web-page'>
                 <Helmet>
@@ -44,7 +56,7 @@ export default class HomePage extends PureComponent {
                 <div className='home-page'>
                     <div className='left-wrapper'>
                         <Calendar
-                            className='default-calendar'
+                            className='default-calendar common-content-wrapper'
                             value={this.state.date}
                             minDetail='year'
                             locale='en'
@@ -52,10 +64,10 @@ export default class HomePage extends PureComponent {
                     </div>
 
                     <div className="right-wrapper">
-                        <ActivitiesContainer 
+                        <ActivitiesContainer
                             label='PERSONAL'
                             activityData=''
-                            />
+                        />
                     </div>
                 </div>
                 <Modal isOpen={this.state.isFormOpen} toggle={this.toggleForm} zIndex="1600">
