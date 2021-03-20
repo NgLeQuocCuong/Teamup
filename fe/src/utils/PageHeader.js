@@ -16,7 +16,9 @@ export default class PageHeader extends PureComponent {
                             <div className='icon-24 logout-icon pointer' />
                         </div> :
                         <div className='right-content'>
-                            <div className='icon-24 login-icon pointer' />
+                            <div 
+                                className='icon-24 login-icon pointer'
+                                onClick={this.props.openLoggin} />
                         </div>
                 }
             </div>
