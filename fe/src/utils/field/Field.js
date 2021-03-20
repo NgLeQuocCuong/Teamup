@@ -1,7 +1,7 @@
 import React, { PureComponent, Fragment } from 'react';
 import { Row, Col, Label } from 'reactstrap';
 import FieldType from '../constants/enums/FieldType';
-import { Input, Select, Radio, DatePicker, Space, TimePicker, Checkbox } from 'antd';
+import { Input, Select, Radio, DatePicker, Space, TimePicker, Checkbox, InputNumber } from 'antd';
 import moment from "moment";
 import { typeChecker } from '../constants/typeChecker';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
@@ -350,6 +350,20 @@ class Field extends PureComponent {
                     placeholder="input password"
                     iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                     onChange={this.handleChange}
+                />
+            )
+        } else if (type === FieldType.NUMBER) {
+            content = (
+                <InputNumber
+                    name={name ? name : ''}
+                    id={id ? id : ''}
+                    value={value}
+                    className={`field-common ${className ? className : ''} ${viewOnly ? 'view-only-input' : ''}`}
+                    onChange={this.handleChange}
+                    onBlur={this.handleBlur}
+                    disabled={isDisabled}
+                    readOnly={viewOnly}
+                    placeholder={placeHolder ? placeHolder : ''}
                 />
             )
         }
