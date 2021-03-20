@@ -15,7 +15,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('email', 'password')
+        fields = ('email', 'password', 'name')
 
     def validate_email(self, value):
         """
@@ -43,6 +43,7 @@ class LoginSerializer(serializers.Serializer):
     email = serializers.CharField()
     password = serializers.CharField()
 
+
     def validate_email(self, value):
         user = User.objects.filter(email=value)
         if not user:
@@ -52,6 +53,7 @@ class LoginSerializer(serializers.Serializer):
     def validate_password(self, value):
         auth.password_validation.validate_password(password=value)
         return value
+
 
 class AuthSerializer(serializers.Serializer):
     token = serializers.SerializerMethodField()

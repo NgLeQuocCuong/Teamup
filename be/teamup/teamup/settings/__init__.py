@@ -24,7 +24,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
 
-    'DATETIME_FORMAT': '%s'
+    # 'DATETIME_FORMAT': '%s'
 }
 
 CORS_ALLOW_ALL_HOST = True

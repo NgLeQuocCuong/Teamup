@@ -3,7 +3,7 @@ from . import views
 
 
 router = routers.DefaultRouter(trailing_slash=False)
-router.register('', views.ActivityView, basename='activity')
-router.register('', views.SportView, basename='sport')
+router.register('activity', views.ActivityView, basename='activity')
+router.register('sport', views.SportView, basename='sport')
 
 urlpatterns = router.urls

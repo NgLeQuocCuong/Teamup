@@ -2,8 +2,7 @@ from django.contrib import auth
 import jwt
 from django.conf import settings
 
-
-def create_user_account(email, password):
+def create_user_account(email, password, name='No Name'):
     """
         A services function to create a normal user
 
@@ -13,7 +12,8 @@ def create_user_account(email, password):
     user = auth.get_user_model().objects.create_user(
         email=email,
         password=password,
-        is_admin=False
+        is_admin=False,
+        name=name
     )
 
     from utils.fields.status import StatusChoices
@@ -22,19 +22,6 @@ def create_user_account(email, password):
     user.save()
 
     return user
-
-def active_user_account(email):
-    try:
-        user = auth.get_user_model().objects.get(email=email)
-        from utils.fields.status import StatusChoices
-        if user.status == StatusChoices.REMOVE:
-            return False
-        else:
-            user.status = StatusChoices.ACTIVE
-            user.save()
-            return True
-    except Exception as e:
-        return False
 
 def get_and_authenticate_user(email, password):
     user = auth.authenticate(email=email, password=password)
@@ -53,10 +40,8 @@ def logout_user_account(token):
         print(e)
         return e.args, False
 
-def change_user_password(user : auth.get_user_model(), password):
-    user.set_password(password)
-    user.save()
-
-def reset_user_password(token, password):
-    user = auth.get_user_model().objects.get(email=token)
-    change_user_password(user, password)
+def get_list_friend(user):
+    from user.models import Friend
+    from django.db.models import Q
+    friendship = Friend.objects.filter(Q(creator=user)|Q(friend=user))
+    return [obj.friend if obj.creator == user else obj.creator for obj in friendship]

@@ -15,19 +15,14 @@ class SportSerializer(serializers.ModelSerializer):
 
 class ActivitySerializer(serializers.ModelSerializer):
 
-    time = serializers.DateTimeField(format='%s')
-
     sport = serializers.UUIDField(read_only=False)
-
     class Meta:
         model = Activity
-        fields = ('name', 'description', 'location', 'age', 'time', 'sport')
+        fields = ('uid', 'name', 'description', 'location', 'age', 'time', 'sport')
 
     def create(self, validated_data):
         sport_id = validated_data.pop('sport')
         sport = Sport.objects.get(uid=sport_id)
-
-        print(validated_data)
 
         activity = Activity(
             **validated_data
@@ -40,3 +35,11 @@ class ActivitySerializer(serializers.ModelSerializer):
         activity.save()
 
         return activity
+
+class ActivityInforSerializer(serializers.ModelSerializer):
+    sport = SportSerializer(many=True)
+    members = UserInformationSerializer(many=True)
+    host = UserInformationSerializer(many=True)
+    class Meta:
+        model = Activity
+        fields = ('uid', 'name', 'description', 'location', 'age', 'time', 'sport', 'members', 'host')

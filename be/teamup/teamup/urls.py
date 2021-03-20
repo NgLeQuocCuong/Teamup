@@ -9,6 +9,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include([
         path('', include(user_urls.urlpatterns)),
-        path('activity/', include(activity_urls.urlpatterns)),
+        path('', include(activity_urls.urlpatterns)),
     ]))
 ]

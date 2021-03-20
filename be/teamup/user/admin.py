@@ -1,5 +1,6 @@
 from django.contrib import admin, messages, auth
 from django.core import exceptions
+from .models import Friend
 
 User = auth.get_user_model()
 
@@ -31,3 +32,5 @@ class BaseUserAdmin(admin.ModelAdmin):
             user_create(**form.cleaned_data)
         except ValidationError as exc:
             self.message_user(request, str(exc), messages.ERROR)
+
+admin.site.register(Friend)

@@ -17,6 +17,7 @@ class AuthViewSet(viewset.BaseView):
     @decorators.action(methods=['POST', ], detail=False)
     def register(self, request):
         serializer = self.get_serializer(data=request.data)
+        print(request.data)
         try:
             serializer.is_valid(raise_exception=True)
             user = user_services.create_user_account(**serializer.validated_data)
@@ -62,8 +63,13 @@ class UserInformationViewSet(viewset.BaseView):
     def get_information(self, request):
         serializer = self.get_serializer(request.user)
         try: 
+            friends = user_services.get_list_friend(request.user)
+
+            data = serializer.data
+            data['friend'] = self.get_serializer(friends, many=True).data
+
             return self.get_response(
-                data=serializer.data,
+                data=data,
                 error_code=http_code.HttpSuccess
             )
         except exceptions.ValidationError as e:
@@ -90,9 +96,15 @@ class UserInformationViewSet(viewset.BaseView):
                 error_code=e.status_code
             )
 
-
-
-        
+    @decorators.action(methods=['GET', ], detail=False)
+    def add_friend(self, request):
+        from .models import User, Friend
+        other_user = User.objects.get(uid=request.GET.get('uid', None))
+        Friend.objects.create(creator=request.user, friend=other_user)
+        return self.get_response(
+            data = None,
+            error_code=http_code.HttpSuccess
+        )
 
 
 

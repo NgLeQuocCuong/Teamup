@@ -4,7 +4,7 @@ from utils.model import BaseModel
 from django.contrib.auth import models as django_models
 
 class BaseUserManager(django_models.BaseUserManager):
-    def create_user(self, email, password=None, is_admin=False):
+    def create_user(self, email, password=None, is_admin=False, name='No Name'):
         """ 
             Create a new user with given email and password.
             If email or password is missing, then raise error.
@@ -19,12 +19,13 @@ class BaseUserManager(django_models.BaseUserManager):
 
         user = self.model(
             email = self.normalize_email(email.lower()),
-            is_admin=is_admin
+            is_admin=is_admin,
+            name=name
         )
 
         user.set_password(password)
 
-        user.full_clean()
+        # user.full_clean()
         user.save(using=self._db)
 
         return user
@@ -81,6 +82,10 @@ class User(BaseModel, django_models.AbstractBaseUser, django_models.PermissionsM
     def is_active(self):
         from utils.fields import status
         return not (self.status in (status.StatusChoices.REMOVE, status.StatusChoices.WATTING))
+
+class Friend(BaseModel):
+    creator = models.ForeignKey(to=User, related_name='friend_creator', on_delete=models.CASCADE)
+    friend = models.ForeignKey(to=User, related_name='friend_friend', on_delete=models.CASCADE)
 
 
 
