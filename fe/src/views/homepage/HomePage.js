@@ -6,6 +6,8 @@ import ProfileContext from '../../context/ProfileContext';
 import ActivitiesContainer from '../../utils/ActivitiesContainer'
 import { Modal } from 'reactstrap';
 import Login from '../../utils/Login';
+import DistanceFilter from '../../utils/DistanceFilter';
+import TypeFilter from '../../utils/TypeFilter';
 
 
 export default class HomePage extends PureComponent {
@@ -15,7 +17,29 @@ export default class HomePage extends PureComponent {
             date: new Date(),
             isFormOpen: false,
             form: null,
+            lat: 0,
+            lng: 0,
+            badminton: true,
+            football: true,
+            distance: 1,
         }
+    }
+    handleChange = ({ name, value }) => {
+        console.log(name, value)
+        if (name === 'distance') {
+            value = parseFloat(value.toString().slice(0, 3))
+        }
+        this.setState({
+            [name]: value
+        })
+    }
+    getPosition = () => {
+        navigator.geolocation.getCurrentPosition(position =>
+            this.setState({
+                lat: parseFloat(position.coords.latitude),
+                lng: parseFloat(position.coords.longitude),
+            })
+        )
     }
     toggleForm = () => {
         const isFormOpen = !this.state.isFormOpen
@@ -44,18 +68,20 @@ export default class HomePage extends PureComponent {
                 <div className='home-page'>
                     <div className='left-wrapper'>
                         <Calendar
-                            className='default-calendar'
+                            className='default-calendar common-content-wrapper'
                             value={this.state.date}
                             minDetail='year'
                             locale='en'
                         />
+                        <TypeFilter handleChange={this.handleChange} datas={this.state} />
+                        <DistanceFilter handleChange={this.handleChange} value={this.state.distance} />
                     </div>
 
                     <div className="right-wrapper">
-                        <ActivitiesContainer 
+                        <ActivitiesContainer
                             label='PERSONAL'
                             isHost='true'
-                            />
+                        />
                         {/* <ActivitiesContainer 
                             label='FRIENDS'
                             />

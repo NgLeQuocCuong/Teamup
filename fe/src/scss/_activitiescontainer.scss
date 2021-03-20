@@ -5,6 +5,7 @@
         align-items: center;
         justify-content: space-between;
         margin-bottom: 10px;
+        border-radius: 6px;
     }
 
     .label {
@@ -15,13 +16,13 @@
 
     .add-button {
         background-color: #edba61;
-        width: 100px;
+        width: 80px;
         height: 40px;
-        border-radius: 10px;
+        border-radius: 12px 12px 0px 0px;
         background-repeat: no-repeat;
         background-position: center;
         margin-top: 5px;
         margin-bottom: 5px;
-        margin-right: 5px;
+        margin-right: 15px;
     }
 }

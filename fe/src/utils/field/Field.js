@@ -1,7 +1,7 @@
 import React, { PureComponent, Fragment } from 'react';
 import { Row, Col, Label } from 'reactstrap';
 import FieldType from '../constants/enums/FieldType';
-import { Input, Select, Radio, DatePicker, Space, TimePicker, Checkbox } from 'antd';
+import { Input, Select, Radio, DatePicker, Space, TimePicker, Checkbox, InputNumber } from 'antd';
 import moment from "moment";
 import { typeChecker } from '../constants/typeChecker';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
@@ -330,8 +330,8 @@ class Field extends PureComponent {
         else if (type === FieldType.TEXT_WITH_BTN) {
             content = (
                 < Input
-                    addonBefore={this.props.onClickLeft ? <div className='icon24 arrow-left-icon' onClick={() => { this.setValue(this.props.onClickLeft(value)) }} /> : null}
-                    addonAfter={this.props.onClickRight ? <div className='icon24 arrow-right-icon' onClick={() => { this.setValue(this.props.onClickRight(value)) }} /> : null}
+                    addonBefore={this.props.onClickLeft ? <div className='icon-24 arrow-left-icon' onClick={() => { this.setValue(this.props.onClickLeft(value)) }} /> : null}
+                    addonAfter={this.props.onClickRight ? <div className='icon-24 arrow-right-icon' onClick={() => { this.setValue(this.props.onClickRight(value)) }} /> : null}
                     name={name ? name : ''}
                     id={id ? id : ''}
                     value={value}
@@ -350,6 +350,20 @@ class Field extends PureComponent {
                     placeholder="input password"
                     iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                     onChange={this.handleChange}
+                />
+            )
+        } else if (type === FieldType.NUMBER) {
+            content = (
+                <InputNumber
+                    name={name ? name : ''}
+                    id={id ? id : ''}
+                    value={value}
+                    className={`field-common ${className ? className : ''} ${viewOnly ? 'view-only-input' : ''}`}
+                    onChange={this.handleChange}
+                    onBlur={this.handleBlur}
+                    disabled={isDisabled}
+                    readOnly={viewOnly}
+                    placeholder={placeHolder ? placeHolder : ''}
                 />
             )
         }
