@@ -19,7 +19,7 @@ export default class HomePage extends PureComponent {
                     <title>Trang chủ</title>
                 </Helmet>
                 <ProfileContext.Consumer>
-                    {profile => <PageHeader uid={profile.uid} />}
+                    {profile => <PageHeader loggedin={profile.access} />}
                 </ProfileContext.Consumer>
                 <div className='home-page'>
                     <div className='left-wrapper'>

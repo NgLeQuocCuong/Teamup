@@ -8,10 +8,10 @@ export default class PageHeader extends PureComponent {
                     <div className='logo' />
                 </div>
                 {
-                    this.props.uid ?
+                    this.props.loggedin ?
                         <div className='right-content'>
                             <div className='icon-24 white-notification-icon' />
-                            <div className='icon-24 person-icon' />
+                            <div className='icon-24 white-person-icon' />
                         </div> :
                         <div className='right-content'>
                             <div className=''>Login</div>
