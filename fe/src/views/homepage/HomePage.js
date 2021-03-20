@@ -19,7 +19,7 @@ export default class HomePage extends PureComponent {
                     <title>Trang chủ</title>
                 </Helmet>
                 <ProfileContext.Consumer>
-                    {profile => <PageHeader loggedin={profile.access} />}
+                    { profile => <PageHeader loggedin={profile.access} /> }
                 </ProfileContext.Consumer>
                 <div className='home-page'>
                     <div className='left-wrapper'>
@@ -29,6 +29,10 @@ export default class HomePage extends PureComponent {
                             minDetail='year'
                             locale='en'
                         />
+
+                        <div>
+                            
+                        </div>
                     </div>
                 </div>
             </div>
