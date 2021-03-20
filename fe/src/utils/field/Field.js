@@ -330,8 +330,8 @@ class Field extends PureComponent {
         else if (type === FieldType.TEXT_WITH_BTN) {
             content = (
                 < Input
-                    addonBefore={this.props.onClickLeft ? <div className='icon24 arrow-left-icon' onClick={() => { this.setValue(this.props.onClickLeft(value)) }} /> : null}
-                    addonAfter={this.props.onClickRight ? <div className='icon24 arrow-right-icon' onClick={() => { this.setValue(this.props.onClickRight(value)) }} /> : null}
+                    addonBefore={this.props.onClickLeft ? <div className='icon-24 arrow-left-icon' onClick={() => { this.setValue(this.props.onClickLeft(value)) }} /> : null}
+                    addonAfter={this.props.onClickRight ? <div className='icon-24 arrow-right-icon' onClick={() => { this.setValue(this.props.onClickRight(value)) }} /> : null}
                     name={name ? name : ''}
                     id={id ? id : ''}
                     value={value}

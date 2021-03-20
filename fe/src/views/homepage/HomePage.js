@@ -6,7 +6,8 @@ import ProfileContext from '../../context/ProfileContext';
 import ActivitiesContainer from '../../utils/ActivitiesContainer'
 import { Modal } from 'reactstrap';
 import Login from '../../utils/Login';
-import MapViewer from '../../utils/MapViewer';
+import DistanceFilter from '../../utils/DistanceFilter';
+import TypeFilter from '../../utils/TypeFilter';
 
 
 export default class HomePage extends PureComponent {
@@ -16,15 +17,27 @@ export default class HomePage extends PureComponent {
             date: new Date(),
             isFormOpen: false,
             form: null,
-            lat: '',
-            lng: '',
+            lat: 0,
+            lng: 0,
+            badminton: true,
+            football: true,
+            distance: 1,
         }
+    }
+    handleChange = ({ name, value }) => {
+        console.log(name, value)
+        if (name === 'distance') {
+            value = parseFloat(value.toString().slice(0, 3))
+        }
+        this.setState({
+            [name]: value
+        })
     }
     getPosition = () => {
         navigator.geolocation.getCurrentPosition(position =>
             this.setState({
-                lat: position.coords.latitude,
-                lng: position.coords.longtitude,
+                lat: parseFloat(position.coords.latitude),
+                lng: parseFloat(position.coords.longitude),
             })
         )
     }
@@ -44,7 +57,6 @@ export default class HomePage extends PureComponent {
         })
     }
     render() {
-        console.log(typeof this.state.lng)
         return (
             <div id='web-page'>
                 <Helmet>
@@ -61,6 +73,8 @@ export default class HomePage extends PureComponent {
                             minDetail='year'
                             locale='en'
                         />
+                        <TypeFilter handleChange={this.handleChange} datas={this.state} />
+                        <DistanceFilter handleChange={this.handleChange} value={this.state.distance} />
                     </div>
 
                     <div className="right-wrapper">
