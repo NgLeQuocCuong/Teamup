@@ -48,6 +48,10 @@ export default class HomePage extends PureComponent {
                             minDetail='year'
                             locale='en'
                         />
+
+                        <div>
+
+                        </div>
                     </div>
                 </div>
                 <Modal isOpen={this.state.isFormOpen} toggle={this.toggleForm} zIndex="1600">
