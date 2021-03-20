@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react'
+import { Modal } from 'reactstrap'
 import Activity from './Activity'
+import AddActivity from './AddActivity'
 
 const l = [
     {
@@ -23,6 +25,31 @@ const l = [
 ]
 
 export default class ActivitiesContainer extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            date: new Date(),
+            isFormOpen: false,
+            form: null,
+        }
+    }
+
+    toggleForm = () => {
+        const isFormOpen = !this.state.isFormOpen
+        this.setState({
+            isFormOpen: isFormOpen,
+        })
+    }
+    
+    AddActivityForm = <AddActivity />
+
+    openForm = form => {
+        this.setState({
+            isFormOpen: true,
+            form: form,
+        })
+    }
+
     render() {
         return (
             <div className='activities-container common-content-wrapper'>
@@ -30,7 +57,8 @@ export default class ActivitiesContainer extends PureComponent {
                     <div className='label'>{this.props.label}</div>
                     { this.props.isHost && <div 
                         className="add-icon add-button pointer"
-                        onClick={() => console.log("Add an Activity")}>
+                        // onClick={() => console.log("Add an Activity")}>
+                        onClick={() => this.openForm(this.AddActivityForm)}>
                     </div>}
                 </div>
 
@@ -41,6 +69,10 @@ export default class ActivitiesContainer extends PureComponent {
                             data = { item }/>    
                     )}
                 </div>
+
+                <Modal isOpen={this.state.isFormOpen} toggle={this.toggleForm} zIndex="1600">
+                    {this.state.form}
+                </Modal>
             </div>
         )
     }

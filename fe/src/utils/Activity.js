@@ -5,6 +5,7 @@ function mapTypeToIcon(type) {
     switch (type) {
         case ActivityType.FOOTBALL: return 'football-icon'
         case ActivityType.BADMINTON: return 'badminton-icon'
+        case ActivityType.BASKETBALL: return 'basketball-icon'
         default: return ''
     } 
 }
