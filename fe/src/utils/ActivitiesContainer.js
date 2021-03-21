@@ -6,6 +6,7 @@ import AddActivity from './AddActivity'
 const l = [
     {
         uid: '12',
+        name: "2021",
         time: '2021-03-20T12:59',
         type: 'football',
         location: 'Nha thang Duy',
@@ -15,6 +16,7 @@ const l = [
     },
     {
         uid: '45',
+        name: "2021",
         time: '2021-03-21T23:03',
         type: 'badminton',
         location: 'Nha chu tich Khoi',
