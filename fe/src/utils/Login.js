@@ -78,9 +78,10 @@ export default class Login extends PureComponent {
         this.setState({
             isSubmitting: false,
         })
+        console.log(body)
         if (success) {
-            localStorage.setItem('access', body.data && body.data.access)
-            localStorage.setItem('refesh', body.data && body.data.refresh)
+            localStorage.setItem('access', body.data && body.data.token && body.data.token.access)
+            localStorage.setItem('refresh', body.data && body.data.token && body.data.token.refresh)
             this.props.handleClose()
             this.props.toggle()
         }

@@ -2,24 +2,39 @@ import React, { PureComponent } from 'react'
 import { Button } from 'antd'
 import FieldType from '../utils/constants/enums/FieldType'
 import Field from '../utils/field/Field'
-
+import MapViewer from './MapViewer'
+import { SportServices } from '../services/SportServices'
 export default class AddActivity extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
+            name: '',
             type: '',
+            typeOption: [],
             location: '',
             time: '',
-            nCurrentMembers: 0,
-            nMaxMembers: 0,
+            current_members: 0,
+            max_members: 0,
             isSubmitting: false,
+            description: '',
         }
     }
-    
+    async componentDidMount() {
+        let [success, body] = await SportServices.getListSport()
+        if (success) {
+            this.setState({
+                typeOption: body.data,
+            })
+        }
+    }
+
     handleChange = ({ name, value }) => {
-        // this.validateInput(name, value)
+        console.log(name, value)
+        const { current_members, max_members } = this.state
         this.setState({
             [name]: value,
+            max_members: name === 'current_members' ? Math.max(value, max_members) : max_members,
+            current_members: name === 'max_members' ? Math.min(value, current_members) : current_members,
         })
     }
 
@@ -28,13 +43,17 @@ export default class AddActivity extends PureComponent {
             isSubmitting: true
         })
         let data = new FormData()
-        data.append('type', this.state.type)
-        // data.append('host', ???)
+        data.append('name', this.state.name)
+        data.append('description', this.state.description)
+        data.append('sport', this.state.type)
         data.append('location', this.state.location)
-        data.append('time', this.state.time)
-        data.append('nCurrentMembers', this.state.nCurrentMembers)
-        data.append('nMaxMembers', this.state.nMaxMembers)
-        // let [success, body] = await ProfileServices.login(data)
+        data.append('time', '2021-03-21T16:00')
+        data.append('current_members', this.state.current_members)
+        data.append('max_members', this.state.max_members)
+        let [success, body] = await SportServices.createActivity(data)
+        if (success) {
+            this.props.handleClose()
+        }
         this.setState({
             isSubmitting: false,
         })
@@ -50,46 +69,52 @@ export default class AddActivity extends PureComponent {
         return (
             <div className='account-form'>
                 <span className='align-left title'>Add Activity</span>
-
-                
-
                 <Field
-                    name='location'
+                    name='name'
                     type={FieldType.TEXT}
-                    label='Location'
-                    id='location'
+                    label='Activity Name'
                     onChange={this.handleChange}
+                    value={this.state.name}
                 />
-
-                <div style={{display:'flex'}}>
-                    <Field
-                        name='nCurrentMembers'
-                        type={FieldType.TEXT}
-                        label='Current Members'
-                        id='nCurrentMembers'
-                        onChange={this.handleChange}
-                    />
-
-                    <div> / </div>
-
-                    <Field
-                        name='nMaxMembers'
-                        type={FieldType.TEXT}
-                        label='Max Members'
-                        id='nMaxMembers'
-                        onChange={this.handleChange}
-                    />
-                    </div>
+                <Field
+                    name='type'
+                    type={FieldType.SINGLE_SELECT}
+                    label='Activity Type'
+                    onChange={this.handleChange}
+                    value={this.state.type}
+                    options={this.state.typeOption}
+                />
+                <Field
+                    name='current_members'
+                    type={FieldType.NUMBER}
+                    label='Current Members'
+                    id='current_members'
+                    onChange={this.handleChange}
+                    value={this.state.current_members}
+                    minValue={0}
+                />
+                <Field
+                    name='max_members'
+                    type={FieldType.NUMBER}
+                    label='Max Members'
+                    id='max_members'
+                    onChange={this.handleChange}
+                    value={this.state.max_members}
+                    minValue={0}
+                />
                 <Field
                     name='description'
                     type={FieldType.TEXTAREA}
                     label='Description'
                     id='description'
                     onChange={this.handleChange}
+                    value={this.state.description}
                 />
-
-                <Button 
-                    loading={this.state.isSubmitting} 
+                <div className='map-viewer'>
+                    <MapViewer onChange={this.handleChange} />
+                </div>
+                <Button
+                    loading={this.state.isSubmitting}
                     onClick={this.handleSubmit}>Add
                 </Button>
             </div>

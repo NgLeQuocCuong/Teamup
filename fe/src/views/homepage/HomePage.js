@@ -3,11 +3,11 @@ import { Helmet } from 'react-helmet';
 import Calendar from 'react-calendar';
 import PageHeader from '../../utils/PageHeader';
 import ProfileContext from '../../context/ProfileContext';
-import ActivitiesContainer from '../../utils/ActivitiesContainer'
 import { Modal } from 'reactstrap';
 import Login from '../../utils/Login';
 import DistanceFilter from '../../utils/DistanceFilter';
 import TypeFilter from '../../utils/TypeFilter';
+import ActivitiesWrapper from '../../utils/ActivitiesWrapper';
 
 
 export default class HomePage extends PureComponent {
@@ -24,6 +24,10 @@ export default class HomePage extends PureComponent {
             distance: 1,
         }
     }
+    componentDidMount() {
+        this.getPosition()
+    }
+
     handleChange = ({ name, value }) => {
         console.log(name, value)
         if (name === 'distance') {
@@ -63,7 +67,7 @@ export default class HomePage extends PureComponent {
                     <title>Trang chủ</title>
                 </Helmet>
                 <ProfileContext.Consumer>
-                    {profile => <PageHeader loggedin={profile.userName} openLoggin={() => this.openForm(this.LoginForm)} toggleForm={this.toggleForm} toggle={profile.toggleValue} />}
+                    {profile => <PageHeader loggedin={profile.name} openLoggin={() => this.openForm(this.LoginForm)} toggleForm={this.toggleForm} toggle={profile.toggleValue} />}
                 </ProfileContext.Consumer>
                 <div className='home-page'>
                     <div className='left-wrapper'>
@@ -77,18 +81,9 @@ export default class HomePage extends PureComponent {
                         <DistanceFilter handleChange={this.handleChange} value={this.state.distance} />
                     </div>
 
-                    <div className="right-wrapper">
-                        <ActivitiesContainer
-                            label='PERSONAL'
-                            isHost='true'
-                        />
-                        {/* <ActivitiesContainer 
-                            label='FRIENDS'
-                            />
-                        <ActivitiesContainer 
-                            label='NEARBY'
-                            /> */}
-                    </div>
+                    <ProfileContext.Consumer>
+                        {profile => <ActivitiesWrapper loggedin={profile.name} />}
+                    </ProfileContext.Consumer>
                 </div>
                 <Modal isOpen={this.state.isFormOpen} toggle={this.toggleForm} zIndex="1600">
                     {this.state.form}

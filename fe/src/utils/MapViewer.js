@@ -18,18 +18,22 @@ class MapWrapper extends PureComponent {
                 initialCenter: {
                     lat: parseFloat(pos.coords.latitude),
                     lng: parseFloat(pos.coords.longitude),
+                },
+                markerPosition: {
+                    lat: parseFloat(pos.coords.latitude),
+                    lng: parseFloat(pos.coords.longitude),
                 }
             }))
     }
 
     onMapClicked = (a, b, c) => {
-        console.log(c.latLng.lat())
         this.setState({
             markerPosition: {
                 lat: c.latLng.lat(),
                 lng: c.latLng.lng(),
             }
         })
+        this.props.onChange && this.props.onChange({ name: 'location', value: this.state.markerPosition.lat + '|' + this.state.markerPosition.lng })
     }
     render() {
         return (

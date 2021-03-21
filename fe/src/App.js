@@ -17,22 +17,21 @@ class App extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            userName: '',
-            listFriend: [],
+            name: '',
+            friend: [],
             toggle: true,
         }
     }
 
-    componentDidMount() {
-        console.log('hihi')
-        let [success, body] = ProfileServices.getUserInfo()
+    async componentDidMount() {
+        let [success, body] = await ProfileServices.getUserInfo()
         if (success) {
             this.setState(body.data)
         }
     }
-    componentDidUpdate(prevProps, prevState) {
+    async componentDidUpdate(prevProps, prevState) {
         if (prevState.toggle !== this.state.toggle) {
-            let [success, body] = ProfileServices.getUserInfo()
+            let [success, body] = await ProfileServices.getUserInfo()
             if (success) {
                 this.setState(body.data)
             }
@@ -40,7 +39,6 @@ class App extends PureComponent {
     }
 
     toggle = () => {
-        console.log('HIHI')
         const tg = !this.state.toggle
         this.setState({
             toggle: tg,
@@ -53,8 +51,8 @@ class App extends PureComponent {
                 <ScrollToTop>
                     <ProfileContext.Provider
                         value={{
-                            userName: this.state.userName,
-                            listFriend: this.state.listFriend,
+                            name: this.state.name,
+                            friend: this.state.friend,
                             toggleFunction: this.toggle,
                             toggleValue: this.state.toggle,
                         }}
