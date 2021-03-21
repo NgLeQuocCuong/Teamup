@@ -37,7 +37,6 @@ export default class ActivitiesContainer extends PureComponent {
                         <div className='label'>{this.props.label}</div>
                         {this.props.isHost && <div
                             className="add-icon add-button pointer"
-                            // onClick={() => console.log("Add an Activity")}>
                             onClick={() => this.openForm(this.AddActivityForm)}>
                         </div>}
                     </div>

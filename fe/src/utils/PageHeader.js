@@ -6,7 +6,7 @@ export default class PageHeader extends PureComponent {
             <div className='page-header'>
                 <div className='left-content'>
                     <div className='logo' />
-                    <div>TeamUp</div>
+                    {/* <div>TeamUp</div> */}
                 </div>
                 {
                     this.props.loggedin ?

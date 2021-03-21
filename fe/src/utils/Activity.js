@@ -15,15 +15,16 @@ function mapTypeToIcon(type) {
 }
 
 export default class Activity extends PureComponent {
+    
+
     render() {
         return (
             <div className="activity common-content-wrapper">
                 <div className='activity-row'>
                     <div className={'activity-icon icon-24 ' + mapTypeToIcon(this.props.data.sport[0].name)} />
 
-                    <div className='activity-name'>{this.props.data.name}</div>
+                    <div className='activity-name'>{ this.props.data.name }</div>
 
-                    {/* <div className={'activity-current-nmem-' +  */}
                     <div className= 
                     {(this.props.data.current_members + this.props.data.members.length === this.props.data.max_members) ? 'activity-current-nmem-full' : 'activity-current-nmem-vacant'}>
                         {`${commonFunction.formatNumString(this.props.data.current_members + this.props.data.members.length)}/${commonFunction.formatNumString(this.props.data.max_members)}`}
@@ -31,15 +32,21 @@ export default class Activity extends PureComponent {
                 </div>
 
                 <div className='activity-row'>
-                    {this.props.data.time.split('T')[0] + ' ' + this.props.data.time.split('T')[1]}
+                    <div className='right-margin-10 icon-24 time-icon'/>
+                    <div>
+                        {this.props.data.time.split('T')[0] + ' ' + this.props.data.time.split('T')[1]}
+                    </div>
                 </div>
 
                 <div className='activity-row'>
-                    {console.log(this.props.data.location)}
-                    { (getDistance(
-                        this.props.userPos, 
+                    {/* {console.log(this.props.data.location)} */}
+                    <div className='margin-right-20 icon-24 location-icon'></div>
+
+                    <div>
+                        { (getDistance(this.props.userPos, 
                         { lat: parseFloat(this.props.data.location.split('|')[0]), lng: parseFloat(this.props.data.location.split('|')[1])}) / TO_KM)
                         + ' km'}
+                    </div>
                 </div>
 
                 <div className='activity-row'>
