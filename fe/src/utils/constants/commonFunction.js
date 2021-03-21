@@ -39,7 +39,10 @@ const getParamValue = (paramName, search) => {
     return paramValue;
 }
 
+const formatNumString = num => (num > 9 ? "" : "0") + num
+
 export const commonFunction = {
     convertTimestamp,
     getParamValue,
+    formatNumString
 }

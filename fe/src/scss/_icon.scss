@@ -5,6 +5,13 @@
 .pointer {
     cursor: pointer;
 }
+.logo {
+    background-image: url(../assets/images/teamup-logo.jpg);
+    height: 36px;
+    width: 100px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
 .notification-icon {
     background-image: url(../assets/icons/notifications_24px.svg);
 }
@@ -38,4 +45,10 @@
 }
 .basketball-icon {
     background-image: url(../assets/icons/basketball-icon.png);
+}
+.time-icon {
+    background-image: url(../assets/icons/access_time-24px.svg)
+}
+.location-icon {
+    background-image: url(../assets/icons/location-24dp.svg);
 }

@@ -19,7 +19,7 @@ export default class DistanceFilter extends PureComponent {
             return value.toPrecision(1)
         } else if (value < 10) {
             value += 1
-            return value.toPrecision(1)
+            return value
         }
         return value
     }

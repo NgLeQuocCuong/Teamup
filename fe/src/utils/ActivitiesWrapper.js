@@ -46,14 +46,17 @@ export default class ActivitiesWrapper extends PureComponent {
                     isHost={true}
                     datas={this.state.personal}
                     toggle={this.toggle}
+                    userPos={this.props.userPos}
                 />
                 <ActivitiesContainer
                     label='FRIENDS'
+                    userPos={this.props.userPos}
                     datas={this.state.friends}
                     toggle={this.toggle}
                 />
                 <ActivitiesContainer
                     label='NEARBY'
+                    userPos={this.props.userPos}
                     datas={this.state.other}
                     toggle={this.toggle}
                 />

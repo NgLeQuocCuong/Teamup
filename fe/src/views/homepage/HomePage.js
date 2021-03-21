@@ -82,7 +82,7 @@ export default class HomePage extends PureComponent {
                     </div>
 
                     <ProfileContext.Consumer>
-                        {profile => <ActivitiesWrapper loggedin={profile.name} />}
+                        {profile => <ActivitiesWrapper loggedin={profile.name} userPos={{ lat: this.state.lat, lng: this.state.lng }} />}
                     </ProfileContext.Consumer>
                 </div>
                 <Modal isOpen={this.state.isFormOpen} toggle={this.toggleForm} zIndex="1600">
