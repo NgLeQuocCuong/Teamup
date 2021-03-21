@@ -46,7 +46,10 @@ export default class ActivitiesContainer extends PureComponent {
                         {this.props.datas && this.props.datas.map(item =>
                             <Activity
                                 key={item.uid}
-                                data={item} />
+                                data={item}
+                                disableJoin={this.props.isHost}
+                                toggle={this.props.toggle}
+                            />
                         )}
                     </div>
 

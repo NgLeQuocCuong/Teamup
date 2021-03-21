@@ -9,10 +9,22 @@ export default class ActivitiesWrapper extends PureComponent {
             personal: [],
             friends: [],
             other: [],
+            toggle: true,
         }
     }
     componentDidMount() {
         this.prepareActivities(this.props.loggedin)
+    }
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.toggle !== this.state.toggle) {
+            this.prepareActivities(this.props.loggedin)
+        }
+    }
+    toggle = () => {
+        const toggle = !this.state.toggle
+        this.setState({
+            toggle: toggle
+        })
     }
 
     prepareActivities = async loggedin => {
@@ -31,16 +43,19 @@ export default class ActivitiesWrapper extends PureComponent {
             <div className="right-wrapper">
                 <ActivitiesContainer
                     label='PERSONAL'
-                    isHost='true'
+                    isHost={true}
                     datas={this.state.personal}
+                    toggle={this.toggle}
                 />
                 <ActivitiesContainer
                     label='FRIENDS'
                     datas={this.state.friends}
+                    toggle={this.toggle}
                 />
                 <ActivitiesContainer
                     label='NEARBY'
                     datas={this.state.other}
+                    toggle={this.toggle}
                 />
             </div>
         )

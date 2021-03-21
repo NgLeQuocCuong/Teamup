@@ -7,6 +7,7 @@ const GET_SPORT_LIST = API_ROOT + 'api/sport/get_list'
 
 const CREATE_ACTIVITY = API_ROOT + 'api/activity/add'
 const GET_ACTIVITIES = API_ROOT + 'api/activity/get_list'
+const JOIN_ACTIVITY = API_ROOT + 'api/activity/accept'
 
 export const API_CONST = {
     LOGIN,
@@ -14,4 +15,5 @@ export const API_CONST = {
     GET_SPORT_LIST,
     CREATE_ACTIVITY,
     GET_ACTIVITIES,
+    JOIN_ACTIVITY,
 }

@@ -14,7 +14,6 @@
     }
 
     .activity-icon {
-        flex : 1;
         background-repeat: no-repeat;
         margin-right: 10px;
     }
@@ -27,18 +26,22 @@
     }
 
     .activity-current-nmem-vacant {
-        flex : 2;
         font-weight: bold;
         color: yellowgreen;
     }
     
     .activity-current-nmem-full {
-        flex : 2;
         font-weight: bold;
         color: red
     }
 
     .add-friend-margin {
         margin-right: 10px;
+    }
+}
+
+.modal-content {
+    .activity-row {
+        margin-top: 12px;
     }
 }
