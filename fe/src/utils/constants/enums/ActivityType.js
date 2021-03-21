@@ -1,7 +1,7 @@
 const ActivityType = Object.freeze({
-    FOOTBALL: 'football',
-    BADMINTON: 'badminton',
-    BASKETBALL: 'basketball'
+    FOOTBALL: 'Football',
+    BADMINTON: 'Badminton',
+    BASKETBALL: 'Basketball'
 })
 
 export default ActivityType;

@@ -59,7 +59,6 @@ class Field extends PureComponent {
     handleChange = (event) => {
         let value = '';
         if (this.props.type === FieldType.TEXT ||
-            this.props.type === FieldType.NUMBER ||
             this.props.type === FieldType.RADIO ||
             this.props.type === FieldType.TEXTAREA ||
             this.props.type === FieldType.TEXT_WITH_BTN ||
@@ -77,6 +76,8 @@ class Field extends PureComponent {
         }
         else if (this.props.type === FieldType.DATE || this.props.type === FieldType.TIME) {
             value = event ? event.unix() : '';
+        } else if (this.props.type === FieldType.NUMBER) {
+            value = event
         }
         let valid = true
         if (typeChecker.func(this.props.validate)) {
@@ -171,7 +172,7 @@ class Field extends PureComponent {
     contentItemFieldGroup = () => {
         let content = null;
         const { value } = this.state;
-        const { type, name, id, isDisabled, placeHolder, className, options, viewOnly } = this.props;
+        const { type, name, id, isDisabled, placeHolder, className, options, viewOnly, minValue, maxValue } = this.props;
         if (type === FieldType.TEXT) {
             content = (
                 <Input
@@ -222,7 +223,7 @@ class Field extends PureComponent {
                         options &&
                         options.map(option => {
                             return (
-                                <Option key={option.value} value={option.value}>{option.label}</Option>
+                                <Option key={option.uid} value={option.uid}>{option.name}</Option>
                             )
                         })
                     }
@@ -364,6 +365,8 @@ class Field extends PureComponent {
                     disabled={isDisabled}
                     readOnly={viewOnly}
                     placeholder={placeHolder ? placeHolder : ''}
+                    min={minValue}
+                    max={maxValue}
                 />
             )
         }
