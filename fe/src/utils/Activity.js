@@ -117,7 +117,7 @@ export default class Activity extends PureComponent {
                         <div className='activity-row'>
                             Members:
                         </div>
-                        {this.props.data.members.map(item => <div className='activity-row'>{' + ' + item.name}</div>)}
+                        {this.props.data.members.map(item => <div key={item.name} className='activity-row'>{' + ' + item.name}</div>)}
                     </div>
                 </Modal>
                 <Button shape="round" className='join-btn' disabled={this.props.disableJoin} onClick={this.handleJoin}>Join</Button>

@@ -25,7 +25,8 @@ export default class DistanceFilter extends PureComponent {
     }
     render() {
         return (
-            <div className='common-content-wrapper'>
+            <div className='common-content-wrapper distance-filter'>
+                <div className='label'>Select Distance</div>
                 <Field
                     name='distance'
                     type={FieldType.TEXT_WITH_BTN}
@@ -34,6 +35,7 @@ export default class DistanceFilter extends PureComponent {
                     onClickRight={this.onClickRight}
                     value={this.props.value}
                     onChange={this.props.handleChange}
+                    suffix='km'
                 />
 
             </div>

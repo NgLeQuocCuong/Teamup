@@ -4,7 +4,7 @@ import FieldType from '../constants/enums/FieldType';
 import { Input, Select, Radio, DatePicker, Space, TimePicker, Checkbox, InputNumber } from 'antd';
 import moment from "moment";
 import { typeChecker } from '../constants/typeChecker';
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+import { EyeInvisibleOutlined, EyeTwoTone, LeftOutlined, RightOutlined } from '@ant-design/icons';
 // import TextEditor from '../TextEditor';
 const { Option } = Select;
 const MSG_ERROR_REQUIRED = 'Trường này bắt buộc nhập';
@@ -172,7 +172,7 @@ class Field extends PureComponent {
     contentItemFieldGroup = () => {
         let content = null;
         const { value } = this.state;
-        const { type, name, id, isDisabled, placeHolder, className, options, viewOnly, minValue, maxValue } = this.props;
+        const { type, name, id, isDisabled, placeHolder, className, options, viewOnly, minValue, maxValue, suffix } = this.props;
         if (type === FieldType.TEXT) {
             content = (
                 <Input
@@ -331,8 +331,8 @@ class Field extends PureComponent {
         else if (type === FieldType.TEXT_WITH_BTN) {
             content = (
                 < Input
-                    addonBefore={this.props.onClickLeft ? <div className='icon-24 arrow-left-icon' onClick={() => { this.setValue(this.props.onClickLeft(value)) }} /> : null}
-                    addonAfter={this.props.onClickRight ? <div className='icon-24 arrow-right-icon' onClick={() => { this.setValue(this.props.onClickRight(value)) }} /> : null}
+                    addonBefore={this.props.onClickLeft ? <LeftOutlined onClick={() => { this.setValue(this.props.onClickLeft(value)) }} /> : null}
+                    addonAfter={this.props.onClickRight ? <RightOutlined onClick={() => { this.setValue(this.props.onClickRight(value)) }} /> : null}
                     name={name ? name : ''}
                     id={id ? id : ''}
                     value={value}
@@ -343,6 +343,7 @@ class Field extends PureComponent {
                     disabled={isDisabled}
                     readOnly={viewOnly}
                     placeholder={placeHolder ? placeHolder : ''}
+                    suffix={suffix ? suffix : ''}
                 />
             )
         } else if (type === FieldType.PASSWORD) {

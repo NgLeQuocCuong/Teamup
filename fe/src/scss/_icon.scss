@@ -6,11 +6,12 @@
     cursor: pointer;
 }
 .logo {
-    background-image: url(../assets/images/teamup-logo.jpg);
+    background-image: url(../assets/images/teamup.png);
     height: 36px;
-    width: 100px;
+    width: 240px;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
+    background-position: center;
 }
 .notification-icon {
     background-image: url(../assets/icons/notifications_24px.svg);

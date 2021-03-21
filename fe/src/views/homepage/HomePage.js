@@ -19,8 +19,7 @@ export default class HomePage extends PureComponent {
             form: null,
             lat: 0,
             lng: 0,
-            badminton: true,
-            football: true,
+            sport: '',
             distance: 1,
         }
     }
@@ -82,7 +81,7 @@ export default class HomePage extends PureComponent {
                     </div>
 
                     <ProfileContext.Consumer>
-                        {profile => <ActivitiesWrapper loggedin={profile.name} userPos={{ lat: this.state.lat, lng: this.state.lng }} />}
+                        {profile => <ActivitiesWrapper loggedin={profile.name} userPos={{ lat: this.state.lat, lng: this.state.lng }} sport={this.state.sport} distance={this.state.distance} />}
                     </ProfileContext.Consumer>
                 </div>
                 <Modal isOpen={this.state.isFormOpen} toggle={this.toggleForm} zIndex="1600">

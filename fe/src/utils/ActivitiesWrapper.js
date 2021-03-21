@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react'
 import { SportServices } from '../services/SportServices';
-import ActivitiesContainer from './ActivitiesContainer'
+import ActivitiesContainer from './ActivitiesContainer';
+import { getDistance } from 'geolib'
+
+const TO_KM = 1000
 
 export default class ActivitiesWrapper extends PureComponent {
     constructor(props) {
@@ -38,27 +41,45 @@ export default class ActivitiesWrapper extends PureComponent {
             })
         }
     }
+    activityFilter = (data, distance, sport) => {
+        console.log(this.props.userPos)
+
+        if (sport && data.sport[0].name !== sport) {
+            return false
+        } else if (getDistance(this.props.userPos,
+            { lat: parseFloat(data.location.split('|')[0]), lng: parseFloat(data.location.split('|')[1]) }) / TO_KM > distance) {
+            return false
+
+        }
+        return true
+    }
     render() {
         return (
             <div className="right-wrapper">
                 <ActivitiesContainer
                     label='PERSONAL'
                     isHost={true}
-                    datas={this.state.personal}
+                    datas={this.state.personal.filter(item => this.activityFilter(item, this.props.distance, this.props.sport))}
                     toggle={this.toggle}
                     userPos={this.props.userPos}
+                    distance={this.props.distance}
+                    sport={this.props.sport}
                 />
                 <ActivitiesContainer
                     label='FRIENDS'
                     userPos={this.props.userPos}
-                    datas={this.state.friends}
+                    datas={this.state.friends.filter(item => this.activityFilter(item, this.props.distance, this.props.sport))}
                     toggle={this.toggle}
+                    distance={this.props.distance}
+                    sport={this.props.sport}
                 />
                 <ActivitiesContainer
                     label='NEARBY'
                     userPos={this.props.userPos}
-                    datas={this.state.other}
+                    datas={this.state.other.filter(item => this.activityFilter(item, this.props.distance, this.props.sport))}
                     toggle={this.toggle}
+                    distance={this.props.distance}
+                    sport={this.props.sport}
                 />
             </div>
         )
